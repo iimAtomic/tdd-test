@@ -3,6 +3,7 @@ import { HandRank } from "../models/HandRank.js";
 
 export function evaluateHand(cards: Card[]): [HandRank, number[]] {
   const ranks = cards.map((c) => c.rank).sort((a, b) => b - a);
+  const suits = cards.map((c) => c.suit);
 
   const counts: Record<number, number> = {};
   for (const c of cards) {
@@ -14,12 +15,17 @@ export function evaluateHand(cards: Card[]): [HandRank, number[]] {
   const isSimpleStraight = unique.length === 5 && unique[0]! - unique[4]! === 4;
   const isStraight = isWheel || isSimpleStraight;
   const straightHigh = isWheel ? 5 : unique[0]!;
+  const isFlush = new Set(suits).size === 1;
 
   const entries = Object.entries(counts).map(([rank, count]) => ({
     rank: Number(rank),
     count,
   }));
   entries.sort((a, b) => b.count - a.count || b.rank - a.rank);
+
+  if (isFlush) {
+    return [HandRank.FLUSH, ranks];
+  }
 
   if (isStraight) {
     return [HandRank.STRAIGHT, [straightHigh]];
