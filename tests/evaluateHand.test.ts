@@ -39,3 +39,16 @@ test("detect flush", () => {
   const [rank] = evaluateHand(hand);
   expect(rank).toBe(HandRank.FLUSH);
 });
+
+test("detect full house", () => {
+  const hand = [
+    { rank: 10, suit: "H" },
+    { rank: 10, suit: "D" },
+    { rank: 10, suit: "C" },
+    { rank: 7, suit: "S" },
+    { rank: 7, suit: "H" },
+  ];
+
+  const [rank] = evaluateHand(hand);
+  expect(rank).toBe(HandRank.FULL_HOUSE);
+});
