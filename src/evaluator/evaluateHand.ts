@@ -5,6 +5,12 @@ export function evaluateHand(cards: Card[]): [HandRank, number[]] {
 
   const counts: Record<number, number> = {};
 
+  const pairCount = Object.values(counts).filter(c => c === 2).length;
+
+if (pairCount === 2) {
+  return [HandRank.TWO_PAIR, []];
+}
+
   for (const c of cards) {
     counts[c.rank] = (counts[c.rank] || 0) + 1;
   }
