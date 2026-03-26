@@ -17,6 +17,10 @@ export function evaluateHand(cards: Card[]): [HandRank, number[]] {
   const straightHigh = isWheel ? 5 : unique[0]!;
   const isFlush = new Set(suits).size === 1;
 
+  if (isFlush && isStraight) {
+    return [HandRank.STRAIGHT_FLUSH, [straightHigh]];
+  }
+
   const entries = Object.entries(counts).map(([rank, count]) => ({
     rank: Number(rank),
     count,
