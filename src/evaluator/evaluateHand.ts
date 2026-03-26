@@ -1,15 +1,16 @@
-import { Card } from "../models/Card";
-import { HandRank } from "../models/HandRank";
+import type { Card } from "../models/Card.js";
+import { HandRank } from "../models/HandRank.js";
 
 export function evaluateHand(cards: Card[]): [HandRank, number[]] {
 
-  // 👇 CODE NAÏF VOLONTAIRE
-  for (let i = 0; i < cards.length; i++) {
-    for (let j = i + 1; j < cards.length; j++) {
-      if (cards[i].rank === cards[j].rank) {
-        return [HandRank.PAIR, []];
-      }
-    }
+  const counts: Record<number, number> = {};
+
+  for (const c of cards) {
+    counts[c.rank] = (counts[c.rank] || 0) + 1;
+  }
+
+  if (Object.values(counts).includes(2)) {
+    return [HandRank.PAIR, []];
   }
 
   return [HandRank.HIGH_CARD, []];
