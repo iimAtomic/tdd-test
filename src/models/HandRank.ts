@@ -1,0 +1,11 @@
+export enum HandRank {
+  HIGH_CARD = 1,
+  PAIR,
+  TWO_PAIR,
+  THREE,
+  STRAIGHT,
+  FLUSH,
+  FULL_HOUSE,
+  FOUR,
+  STRAIGHT_FLUSH
+}
