@@ -52,3 +52,16 @@ test("detect full house", () => {
   const [rank] = evaluateHand(hand);
   expect(rank).toBe(HandRank.FULL_HOUSE);
 });
+
+test("detect four of a kind", () => {
+  const hand = [
+    { rank: 10, suit: "H" },
+    { rank: 10, suit: "D" },
+    { rank: 10, suit: "C" },
+    { rank: 10, suit: "S" },
+    { rank: 2, suit: "H" },
+  ];
+
+  const [rank] = evaluateHand(hand);
+  expect(rank).toBe(HandRank.FOUR);
+});
