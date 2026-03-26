@@ -23,6 +23,12 @@ export function evaluateHand(cards: Card[]): [HandRank, number[]] {
   }));
   entries.sort((a, b) => b.count - a.count || b.rank - a.rank);
 
+  if (entries[0]?.count === 4) {
+    const fourRank = entries[0].rank;
+    const kicker = entries[1]!.rank;
+    return [HandRank.FOUR, [fourRank, kicker]];
+  }
+
   if (entries[0]?.count === 3 && entries[1]?.count === 2) {
     return [HandRank.FULL_HOUSE, [entries[0].rank, entries[1].rank]];
   }
