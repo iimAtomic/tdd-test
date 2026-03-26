@@ -65,3 +65,16 @@ test("detect four of a kind", () => {
   const [rank] = evaluateHand(hand);
   expect(rank).toBe(HandRank.FOUR);
 });
+
+test("detect straight flush", () => {
+  const hand = [
+    { rank: 10, suit: "H" },
+    { rank: 9, suit: "H" },
+    { rank: 8, suit: "H" },
+    { rank: 7, suit: "H" },
+    { rank: 6, suit: "H" },
+  ];
+
+  const [rank] = evaluateHand(hand);
+  expect(rank).toBe(HandRank.STRAIGHT_FLUSH);
+});
